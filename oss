@@ -2,7 +2,7 @@
 
 printUsage() 
 {
-	echo "      Usage:oss [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]"
+	echo "      Usage: oss [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]"
         echo "      eg: oss test12 test13"
         echo "      eg: oss -l ip_list_file"
 	exit 2

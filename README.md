@@ -2,7 +2,18 @@
 
 A tool used to ssh multi servers and operate synchronizely
 
+## Usage
 
+```shell
+oss [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]
+
+```
+example
+
+```shell
+oss test12 test13
+oss -l ip_list_file
+```
 
 ### Reference
 NeteaseSshScript
