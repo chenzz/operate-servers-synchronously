@@ -1,6 +1,6 @@
-# multi-servers-synchronize
+# operate-servers-synchronously
 
-A tool used to ssh multi server and operate synchronizely
+A tool used to ssh multi servers and operate synchronizely
 
 
 
