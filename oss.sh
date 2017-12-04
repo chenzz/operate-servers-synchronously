@@ -4,6 +4,7 @@ printUsage()
 {
 	echo "Usage:$0 [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]"
         echo "eg:$0 ip_list_file"
+	exit 2
 }
 
 #parse argument
@@ -24,7 +25,6 @@ do
 			;;
 		[?])
 			printUsage
-			exit 2
 			;;
 	esac
 done
