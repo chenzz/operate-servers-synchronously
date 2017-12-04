@@ -2,8 +2,9 @@
 
 printUsage() 
 {
-	echo "Usage:$0 [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]"
-        echo "eg:$0 ip_list_file"
+	echo "      Usage:oss [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]"
+        echo "      eg: oss test12 test13"
+        echo "      eg: oss -l ip_list_file"
 	exit 2
 }
 
@@ -56,12 +57,5 @@ tmux select-layout tiled
 tmux set-window-option synchronize-panes on
  
 tmux -2 attach-session -t localhost
-
-
-
-
-
-
-
 
 
