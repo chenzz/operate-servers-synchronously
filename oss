@@ -3,10 +3,17 @@
 printUsage() 
 {
 	echo "      Usage: oss [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]"
-        echo "      eg: oss test12 test13"
-        echo "      eg: oss -l ip_list_file"
+	echo "      eg: oss test12 test13"
+	echo "      eg: oss -l ip_list_file"
 	exit 2
 }
+
+
+
+#load config file
+
+source config.sh
+
 
 #parse argument
 has_specify_ip_list=0
@@ -43,12 +50,27 @@ then
 fi
 
 
+if [ -n "${port}" ]
+then
+	sshStringPrefix="${sshStringPrefix} -P ${port}";
+fi
+
+if [ -n "${key}" ]
+then
+	sshStringPrefix="${sshStringPrefix} -P ${port}";
+fi
+
+if [ -n "${user}" ]
+then
+	sshStringPrefix="${sshStringPrefix} ${user}@";
+fi
+
 #construct tumux window
 tmux new-session -d -s localhost
- 
+
 for host in ${hosts}
 do
-	tmux split-window -h "ssh ${host}"
+	tmux split-window -h "ssh ${sshStringPrefix} ${host}"
 done
 
 tmux kill-pane -t 0
