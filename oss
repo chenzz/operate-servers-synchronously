@@ -11,8 +11,10 @@ printUsage()
 
 
 #load config file
-
-source config.sh
+if [ -e config.sh ]
+then
+	source config.sh
+fi
 
 
 #parse argument
@@ -64,6 +66,8 @@ if [ -n "${user}" ]
 then
 	sshStringPrefix="${sshStringPrefix} ${user}@";
 fi
+
+echo ${hosts}
 
 #construct tumux window
 tmux new-session -d -s localhost
