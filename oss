@@ -67,17 +67,31 @@ then
 	sshStringPrefix="${sshStringPrefix} ${user}@";
 fi
 
-echo ${hosts}
 
 #construct tumux window
 tmux new-session -d -s localhost
 
+i=0
+hasCloseFirstPane=false
 for host in ${hosts}
 do
+	#a tmux window could contain 6 pane at most
+	#so close the first incase output 'create pane failed: pane too small'
+	if [ 1 -eq ${i} ]
+	then 
+		echo 'killed'
+		tmux kill-pane -t 0
+		hasCloseFirstPane=true
+	fi
 	tmux split-window -h "ssh ${sshStringPrefix} ${host}"
+	i=$((i+1))
 done
 
-tmux kill-pane -t 0
+if [ false = ${hasCloseFirstPane} ]
+then
+	tmux kill-pane -t 0
+fi
+
 tmux select-pane -t 0
 tmux select-layout tiled
 tmux set-window-option synchronize-panes on
