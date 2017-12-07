@@ -11,9 +11,13 @@ printUsage()
 
 
 #load config file
-if [ -e config.sh ]
+ossPath=`which oss`
+ossDirPath=`dirname ${ossPath}`
+configFilePath="${ossDirPath}/config.sh"
+
+if [ -e ${configFilePath} ]
 then
-	source config.sh
+	source ${configFilePath}
 fi
 
 
@@ -24,7 +28,7 @@ while getopts "hi:l:p:a:" option
 do
 	case $option in
 		i)
-			key="-i $OPTARG";;
+			key=$OPTARG;;
     		p)
 			port=$OPTARG;;
     		u)
@@ -54,12 +58,12 @@ fi
 
 if [ -n "${port}" ]
 then
-	sshStringPrefix="${sshStringPrefix} -P ${port}";
+	sshStringPrefix="${sshStringPrefix} -p ${port}";
 fi
 
 if [ -n "${key}" ]
 then
-	sshStringPrefix="${sshStringPrefix} -P ${port}";
+	sshStringPrefix="${sshStringPrefix} -i ${key}";
 fi
 
 if [ -n "${user}" ]
@@ -78,15 +82,18 @@ do
 	#a tmux window could contain 6 pane at most
 	#so close the first incase output 'create pane failed: pane too small'
 	if [ 1 -eq ${i} ]
-	then 
-		echo 'killed'
+	then
 		tmux kill-pane -t 0
 		hasCloseFirstPane=true
 	fi
-	tmux split-window -h "ssh ${sshStringPrefix} ${host}"
+	
+	sshString="ssh ${sshStringPrefix}${host}"
+	echo ${sshString}
+	tmux split-window -h "${sshString}"
 	i=$((i+1))
 done
 
+#if did not kill first pane, kill it here
 if [ false = ${hasCloseFirstPane} ]
 then
 	tmux kill-pane -t 0
