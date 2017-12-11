@@ -14,6 +14,8 @@ oss [-u user] [-p port] [-i identify_key] [-l ip_list_file] [ip1 ip2 ... ipn]
 
 ```shell
 oss test12 test13
+oss 10.165.124.18 10.165.124.34
+oss -u zhangsan -p 1000 10.165.124.18 10.165.124.34
 oss -l ip_list_file
 ```
 

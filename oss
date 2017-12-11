@@ -24,7 +24,7 @@ fi
 #parse argument
 has_specify_ip_list=0
 
-while getopts "hi:l:p:a:" option
+while getopts "i:p:u:l:" option
 do
 	case $option in
 		i)
@@ -35,7 +35,6 @@ do
 			user=$OPTARG;;
     		l)
 			ip_list_file=$OPTARG
-			has_specify_ip_list=1
 			;;
 		[?])
 			printUsage
@@ -43,11 +42,12 @@ do
 	esac
 done
 
-hosts=$*
 
-if [ 1 -eq ${has_specify_ip_list} ]
+if [ -n "$ip_list_file" ]
 then
 	hosts=`cat ${ip_list_file}`
+else
+	hosts=$*
 fi
 
 if [ -z "${hosts}" ]
@@ -88,7 +88,6 @@ do
 	fi
 	
 	sshString="ssh ${sshStringPrefix}${host}"
-	echo ${sshString}
 	tmux split-window -h "${sshString}"
 	i=$((i+1))
 done
