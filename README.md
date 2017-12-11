@@ -1,9 +1,11 @@
-# operate-servers-synchronously
+operate-servers-synchronously
 
 A tool used to operate multiple servers and operate synchronously,
 using simple `oss -l host_list`
 
 ![](https://raw.githubusercontent.com/chenzz/static-resource/master/0CE23A0B-0592-449A-918B-76BF1037A845.gif)
+
+[TOC]
 
 ## 1、Recommend Usage
 
